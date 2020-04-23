@@ -16,10 +16,15 @@ App.WelcomeIndex = () => {
   }
 
   const renderMarkers = () => {
-    console.log(gon.locations)
-    gon.locations.forEach((loc) => {
-      let marker = L.marker([loc.lat, loc.lng])
-      marker.addTo(map)
+    gon.provinces.forEach((loc) => {
+      let marker = L.circleMarker([loc.lat, loc.lng], {
+        color: "red",
+        fillColor: "#fc7a4e",
+        fillOpacity: 0.8,
+        weight: 1,
+        opacity: 1,
+        radius: 5
+      }).addTo(map)
     })
   }
 
