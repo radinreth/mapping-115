@@ -14,7 +14,7 @@ module Samples
       csv = CSV.read(file_path)
       csv.shift
       csv.each do |data|
-        loc = ::Province.find_or_initialize_by(code: data[0])
+        loc = ::Location.find_or_initialize_by(code: data[0])
         loc.name_en = data[1]
         loc.name_km = data[2]
         loc.kind = data[3]
