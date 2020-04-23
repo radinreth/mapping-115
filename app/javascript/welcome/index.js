@@ -16,7 +16,7 @@ App.WelcomeIndex = () => {
   }
 
   const renderMarkers = () => {
-    gon.provinces.forEach((loc) => {
+    gon.locations.forEach((loc) => {
       let marker = L.circleMarker([loc.lat, loc.lng], {
         color: "red",
         fillColor: "#fc7a4e",
