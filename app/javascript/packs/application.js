@@ -18,4 +18,7 @@ require("channels")
 
 require("leaflet")
 
-require("map")
+require("namespace")
+require("helper")
+require("welcome")
+require("application")
