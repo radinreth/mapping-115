@@ -11,8 +11,6 @@ module Samples
       end
     end
 
-    private
-
     def self.load_from_file(filename)
       file_path = "#{Rails.root}/lib/samples/db/#{filename}.csv"
       unless File.file?(file_path)

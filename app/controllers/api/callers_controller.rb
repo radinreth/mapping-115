@@ -17,7 +17,7 @@ module Api
       # x add popup label, count of callers
       # x dynamic marker size
       # district, commune lat, lng
-      # should show if caller exist
+      # should show only if caller exist
     end
 
     private
