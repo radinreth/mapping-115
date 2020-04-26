@@ -4,8 +4,17 @@ require 'csv'
 
 module Samples
   class Location
+
     def self.load
-      file_path = "#{Rails.root}/lib/samples/db/locations.csv"
+      %w[locations locations-dcv].each do |filename|
+        load_from_file(filename)
+      end
+    end
+
+    private
+
+    def self.load_from_file(filename)
+      file_path = "#{Rails.root}/lib/samples/db/#{filename}.csv"
       unless File.file?(file_path)
         puts "Fail to import data. could not find #{file_path}"
         return
