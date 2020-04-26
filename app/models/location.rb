@@ -1,5 +1,5 @@
 class Location < ApplicationRecord
-  has_many :callers, class_name: 'User'
+  has_many :callers, class_name: 'User', dependent: :destroy
 
   validates :code, :name_en, :name_km, :kind, presence: true
   validates_inclusion_of :kind, in: %w[province district commune village], message: 'type %{value} is invalid'
@@ -10,11 +10,21 @@ class Location < ApplicationRecord
   has_many :children, class_name: 'Location', foreign_key: :parent_id
   belongs_to :parent, class_name: 'Location', optional: true
 
+  def nested_count(obj = self, count = 0)
+    return obj.callers.count unless obj.children.exists?
+
+    obj.children.each do |c|
+      count += (obj.callers.count + nested_count(c, c.callers.count))
+    end
+
+    count
+  end
+
   def self.location_kind(code)
     return if code.blank?
 
     dict = { '2': 'province', '4': 'district', '6': 'commune' }
-    dict[code.to_s.length] || 'village'
+    dict[code.length.to_s.to_sym] || 'village'
   end
 
   private
