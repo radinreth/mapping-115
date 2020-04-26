@@ -12,4 +12,11 @@ html, body {
     width: 100%;
     height: 100%;
   }
+
+  .options {
+    z-index: 400;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
 }
