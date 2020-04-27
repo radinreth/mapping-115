@@ -11,5 +11,8 @@
 
   <body id="<%=controller_name %>_<%= action_name %>">
     <%= yield %>
+
+    <%= javascript_include_tag "moment" %>
+    <%= javascript_include_tag "daterangepicker" %>
   </body>
 </html>

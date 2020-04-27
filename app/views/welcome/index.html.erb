@@ -1,7 +1,12 @@
 <div id="map"></div>
-<div class="btn-group options" role="group" aria-label="Basic example">
-  <%= link_to "Province", root_path(kind: 'province'), class: "btn btn-sm btn-outline-dark #{active_province}" %>
-  <%= link_to "District", root_path(kind: 'district'), class: "btn btn-sm btn-outline-dark #{active_district}" %>
-  <%= link_to "Commune", root_path(kind: 'commune'), class: "btn btn-sm btn-outline-dark #{active_commune}" %>
+<div class="options">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <%= link_to "Province", root_path(kind: 'province'), class: "btn btn-sm btn-outline-dark #{active_province}" %>
+    <%= link_to "District", root_path(kind: 'district'), class: "btn btn-sm btn-outline-dark #{active_district}" %>
+    <%= link_to "Commune", root_path(kind: 'commune'), class: "btn btn-sm btn-outline-dark #{active_commune}" %>
+  </div>
+  <div class="datepicker mt-1">
+    <input name="dates" class="form-control" />
+  </div>
 </div>
 <%= Gon::Base.render_data %>

@@ -8,6 +8,25 @@ App.WelcomeIndex = () => {
   const init = () => {
     renderMap()
     renderMarkers()
+    renderDatetimepicker()
+  }
+
+  const renderDatetimepicker = () => {
+    $('.datepicker > input').daterangepicker({
+      locale: { format: 'DD/MM/YYYY'},
+      cancelLabel: 'Clear',
+      alwaysShowCalendars: true,
+      showCustomRangeLabel: true,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+     },
+     opens: 'left'
+    })
   }
 
   const renderMap = () => {
@@ -35,8 +54,8 @@ App.WelcomeIndex = () => {
   }
 
   const osm = () => {
-    // let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-    let osmUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
+    let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    // let osmUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
     let osmAttrib = "Map data © <a href='https://openstreetmap.org'>OpenStreetMap</a> contributors"
     let osm = new L.TileLayer(osmUrl, { minZoom: 5, maxZoom: 11, attribution: osmAttrib });
     return osm
