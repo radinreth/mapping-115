@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :phone_number, null: false
       t.float :lat
       t.float :lng
+      t.datetime :last_datetime
       t.string :ncdd_code, null: false
       t.belongs_to :location
 

@@ -36,14 +36,14 @@ module Api
           rescue ActiveRecord::RecordNotFound => e
             location_kind = Location.location_kind(new_code)
             loc_pumi = "pumi/#{location_kind}".classify.constantize.find_by_id(new_code) # 0812 => raise
-            @location = Location.create code: loc_pumi.id, name_en: loc_pumi.name_latin, name_km: loc_pumi.name_km, kind: location_kind, parent_id: loc_pumi.id[0...-2]
+            @location = Location.create(code: loc_pumi.id, name_en: loc_pumi.name_latin, name_km: loc_pumi.name_km, kind: location_kind, parent_id: loc_pumi.id[0...-2])
           end
         end
       end
     end
 
     def raw_params
-      params.require(:caller).permit(data: [:phone_number, Location: %i[Latitude Longitude NCDD_Code]])
+      params.require(:caller).permit(data: [:phone_number, Location: %i[LastDate LastLocalTime Latitude Longitude NCDD_Code]])
     end
 
     def caller_params
