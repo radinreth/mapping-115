@@ -7,18 +7,8 @@ class Location < ApplicationRecord
   validates :lng, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }, allow_blank: true
   validate :presence_of_latlng
 
-  has_many :children, class_name: 'Location', foreign_key: :parent_id
+  has_many :children, class_name: 'Location', foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: 'Location', optional: true
-
-  def nested_count(obj = self, count = 0)
-    return obj.callers.count unless obj.children.exists?
-
-    obj.children.each do |c|
-      count += (obj.callers.count + nested_count(c, c.callers.count))
-    end
-
-    count
-  end
 
   def self.location_kind(code)
     return if code.blank?
@@ -26,6 +16,18 @@ class Location < ApplicationRecord
     dict = { '2': 'province', '4': 'district', '6': 'commune' }
     dict[code.length.to_s.to_sym] || 'village'
   end
+
+  def self.update_counters(id, counters)
+    super(id, counters)
+
+    location = Location.find(id)
+    while (ancestor = location.parent.presence)
+      super(ancestor.code, counters)
+      location = ancestor
+    end
+  end
+
+  # TODO: reset_counters
 
   private
 
