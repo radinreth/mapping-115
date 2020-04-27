@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.float :lng
       t.datetime :last_datetime
       t.string :ncdd_code, null: false
-      t.belongs_to :location
+      t.string :location_id, column: :code, index: true
 
       t.timestamps
     end

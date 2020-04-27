@@ -1,12 +1,16 @@
 <div id="map"></div>
 <div class="options">
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <%= link_to "Province", root_path(kind: 'province'), class: "btn btn-sm btn-outline-dark #{active_province}" %>
-    <%= link_to "District", root_path(kind: 'district'), class: "btn btn-sm btn-outline-dark #{active_district}" %>
-    <%= link_to "Commune", root_path(kind: 'commune'), class: "btn btn-sm btn-outline-dark #{active_commune}" %>
+  <div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
+    <button class="btn btn-sm btn-outline-dark <%= active_province %>">Province</button>
+    <button class="btn btn-sm btn-outline-dark <%= active_district %>">District</button>
+    <button class="btn btn-sm btn-outline-dark <%= active_commune %>">Commune</button>
+    <button class="btn btn-sm btn-outline-dark <%= active_village %>">Village</button>
   </div>
   <div class="datepicker mt-1">
-    <input name="dates" class="form-control" />
+    <input name="dates" class="form-control" value="<%= @date_range %>" />
+  </div>
+  <div class="btn-search mt-1">
+    <a href="#" class="btn btn-primary">Search</a>
   </div>
 </div>
 <%= Gon::Base.render_data %>

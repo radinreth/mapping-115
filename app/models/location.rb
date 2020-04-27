@@ -28,6 +28,7 @@ class Location < ApplicationRecord
   end
 
   # TODO: reset_counters
+  # TODO: fix counter
 
   private
 

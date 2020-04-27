@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_024650) do
     t.float "lng"
     t.datetime "last_datetime"
     t.string "ncdd_code", null: false
-    t.bigint "location_id"
+    t.string "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["location_id"], name: "index_users_on_location_id"

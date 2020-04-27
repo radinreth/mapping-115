@@ -1,7 +1,10 @@
 require 'uri'
 require 'net/http'
 
+puts "Clear users..."
 User.destroy_all
+puts "reset counter..."
+Location.find_each { |l| Location.reset_counters(l.code, :callers_count) }
 
 callers = [
   { data: { Location: { LastDate: '2020/01/24', LastLocalTime: '01:17:30',
@@ -14,36 +17,36 @@ callers = [
             phone_number: '85539553423' } },
   { data: { Location: { LastDate: '2020/04/02', LastLocalTime: '14:01:30',
                         Latitude: 11.45778, Longitude: 104.14488,
-                        NCDD_Code: '021201' },
+                        NCDD_Code: '02120104' },
             phone_number: '85593555219' } },
   { data: { Location: { LastDate: '2020/04/22', LastLocalTime: '17:11:34',
                         Latitude: 11.45468, Longitude: 104.954822,
-                        NCDD_Code: '030201' },
+                        NCDD_Code: '03020104' },
             phone_number: '85593551190' } },
   { data: { Location: { LastDate: '2020/02/21', LastLocalTime: '18:12:30',
                         Latitude: 11.45008, Longitude: 104.99888,
-                        NCDD_Code: '1714' },
+                        NCDD_Code: '17140406' },
             phone_number: '85593241226' } },
   { data: { Location: { LastDate: '2020/02/22', LastLocalTime: '18:34:30',
                         Latitude: 11.41508, Longitude: 104.55488,
-                        NCDD_Code: '0603' },
+                        NCDD_Code: '06031003' },
             phone_number: '85593555228' } },
   { data: { Location: { LastDate: '2020/04/20', LastLocalTime: '18:06:30',
                         Latitude: 11.43508, Longitude: 104.24488,
-                        NCDD_Code: '15' },
+                        NCDD_Code: '15060502' },
             phone_number: '85593222112' } },
 
   { data: { Location: { LastDate: '2020/03/26', LastLocalTime: '18:12:23',
                         Latitude: 11.45523, Longitude: 104.92388,
-                        NCDD_Code: '18' },
+                        NCDD_Code: '18050202' },
             phone_number: '85593554002' } },
   { data: { Location: { LastDate: '2020/03/25', LastLocalTime: '20:12:30',
                         Latitude: 11.11508, Longitude: 104.95008,
-                        NCDD_Code: '1901' },
+                        NCDD_Code: '19010404' },
             phone_number: '85593987112' } },
   { data: { Location: { LastDate: '2020/04/05', LastLocalTime: '05:34:30',
                         Latitude: 11.454508, Longitude: 104.195488,
-                        NCDD_Code: '160101' },
+                        NCDD_Code: '16010104' },
             phone_number: '85593555212' } },
 
   { data: { Location: { LastDate: '2020/03/01', LastLocalTime: '21:12:30',
@@ -88,31 +91,31 @@ callers = [
             phone_number: '85596552112' } },
   { data: { Location: { LastDate: '2020/04/11', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '230101' },
+                        NCDD_Code: '23010104' },
             phone_number: '85595551112' } },
   { data: { Location: { LastDate: '2020/04/14', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '171102' },
+                        NCDD_Code: '17110203' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/24', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '180502' },
+                        NCDD_Code: '18050202' },
             phone_number: '85593115112' } },
   { data: { Location: { LastDate: '2020/04/21', LastLocalTime: '18:12:30',
                         Latitude: 11.451508, Longitude: 104.95488,
-                        NCDD_Code: '1501' },
+                        NCDD_Code: '15010401' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/19', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '120112' },
+                        NCDD_Code: '12011203' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/04', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '010808' },
+                        NCDD_Code: '01080804' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/11', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '040203' },
+                        NCDD_Code: '04020303' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/16', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -120,7 +123,7 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/17', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '1711' },
+                        NCDD_Code: '17110408' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/20', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -128,11 +131,11 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/16', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '160701' },
+                        NCDD_Code: '16070105' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/03', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '030108' },
+                        NCDD_Code: '03010805' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/13', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -140,15 +143,15 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/26', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '250205' },
+                        NCDD_Code: '25020504' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/26', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '020209' },
+                        NCDD_Code: '02020901' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/25', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '070712' },
+                        NCDD_Code: '07071204' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/17', LastLocalTime: '18:12:30',
                         Latitude: 11.145508, Longitude: 104.95488,
@@ -156,7 +159,7 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/12', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '021405' },
+                        NCDD_Code: '02140505' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/03/26', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -164,23 +167,23 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/11', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '100108' },
+                        NCDD_Code: '10010803' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/15', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '160103' },
+                        NCDD_Code: '16010303' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/14', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '210106' },
+                        NCDD_Code: '21010605' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/18', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '100211' },
+                        NCDD_Code: '10021102' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/21', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '210102' },
+                        NCDD_Code: '21010202' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/09', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -188,11 +191,11 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/03/30', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '080206' },
+                        NCDD_Code: '08020606' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/15', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '130202' },
+                        NCDD_Code: '13020204' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/20', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -200,7 +203,7 @@ callers = [
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/17', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
-                        NCDD_Code: '060102' },
+                        NCDD_Code: '06010205' },
             phone_number: '85593555112' } },
   { data: { Location: { LastDate: '2020/04/23', LastLocalTime: '18:12:30',
                         Latitude: 11.45508, Longitude: 104.95488,
@@ -211,11 +214,9 @@ callers = [
 # callers = [
 #   { data: { Location: { LastDate: '2020/04/26', LastLocalTime: '18:17:30',
 #                         Latitude: 11.45508, Longitude: 104.95488,
-#                         NCDD_Code: '07111824' },
+#                         NCDD_Code: '19010403' },
 #             phone_number: '85593555112' } }
 # ]
-
-# Location.find_each {|l| Location.reset_counters(l.code, :callers_count) }
 
 url = URI('http://localhost:3000/api/callers')
 
@@ -224,11 +225,13 @@ request = Net::HTTP::Post.new(url)
 request['Content-Type'] = ['application/json', 'text/plain']
 request['Accept'] = 'application/json'
 
+puts "setup callers..."
 callers.each do |caller|
   request.body = caller.to_json
   response = http.request(request)
-  if response.code == "500"
-    puts response.msg, request.body 
+  if response.code == '500'
+    puts response.msg, request.body
     break
   end
 end
+puts "done"
