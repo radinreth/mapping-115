@@ -13,7 +13,7 @@ App.WelcomeIndex = () => {
 
   const renderDatetimepicker = () => {
     $('.datepicker > input').daterangepicker({
-      locale: { format: 'DD/MM/YYYY'},
+      locale: { format: 'YYYY/MM/DD'},
       cancelLabel: 'Clear',
       alwaysShowCalendars: true,
       showCustomRangeLabel: true,
@@ -28,6 +28,17 @@ App.WelcomeIndex = () => {
      opens: 'left'
     })
   }
+
+  $(".options button").click(function() {
+    $(".options button").removeClass("active")
+    $(this).addClass("active")
+  })
+
+  $(".btn-search a").click(function(e){
+    let area = $('.options button.active').text().toLowerCase()
+    let dateRange = $('input').val()
+    $(this).attr('href', `?kind=${area}&daterange=${dateRange}`)
+  })
 
   const renderMap = () => {
     map = L.map("map", { zoom: 13 })

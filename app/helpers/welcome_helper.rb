@@ -1,5 +1,5 @@
 module WelcomeHelper
-  %w[province district commune].each do |kind|
+  %w[province district commune village].each do |kind|
     define_method "active_#{kind}".to_sym do
       return 'active' if kind == 'province' && params[:kind].nil?
 
