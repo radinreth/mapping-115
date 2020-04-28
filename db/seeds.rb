@@ -1,9 +1,8 @@
-require 'uri'
-require 'net/http'
+helper = Rails.application.routes.url_helpers
 
-puts "Clear users..."
+puts 'Clear users...'
 User.destroy_all
-puts "reset counter..."
+puts 'reset counter...'
 Location.find_each { |l| Location.reset_counters(l.code, :callers_count) }
 
 callers = [
@@ -218,20 +217,14 @@ callers = [
 #             phone_number: '85593555112' } }
 # ]
 
-url = URI('http://localhost:3000/api/callers')
+url = helper.api_callers_url(host: 'localhost:3000')
 
-http = Net::HTTP.new(url.host, url.port)
-request = Net::HTTP::Post.new(url)
-request['Content-Type'] = ['application/json', 'text/plain']
-request['Accept'] = 'application/json'
-
-puts "setup callers..."
+puts 'setup callers...'
 callers.each do |caller|
-  request.body = caller.to_json
-  response = http.request(request)
+  response = RestClient.post url, caller
   if response.code == '500'
     puts response.msg, request.body
     break
   end
 end
-puts "done"
+puts 'done'
