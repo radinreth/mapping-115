@@ -1,3 +1,5 @@
+# frozen_string_literal :true
+
 module Api
   class CallersController < ApplicationController
     before_action :set_location
@@ -26,14 +28,26 @@ module Api
           begin
             Location.find(new_code)
           rescue ActiveRecord::RecordNotFound => e
-            location_kind = Location.location_kind(new_code)
-            loc_pumi = "pumi/#{location_kind}".classify.constantize.find_by_id(new_code) # 0812 => raise
-            if loc_pumi
-              @location = Location.create(code: loc_pumi.id, name_en: loc_pumi.name_latin, name_km: loc_pumi.name_km, kind: location_kind, parent_id: loc_pumi.id[0...-2])
-            end
+            @location = pumi_location(new_code)
           end
         end
       end
+    end
+
+    def pumi_location(code)
+      location_kind = Location.location_kind(code)
+      loc_pumi = "pumi/#{location_kind}".classify.constantize.find_by_id(code)
+      if loc_pumi.present?
+        location = Location.create do |loc|
+          loc.code      = loc_pumi.id
+          loc.name_en   = loc_pumi.name_latin
+          loc.name_km   = loc_pumi.name_km
+          loc.kind      = location_kind
+          loc.parent_id = loc_pumi.id[0...-2]
+        end
+      end
+
+      location
     end
 
     def raw_params
