@@ -23,4 +23,11 @@ RSpec.describe Location, type: :model do
   it { is_expected.to have_attribute(:lat) }
   it { is_expected.to have_attribute(:lng) }
   it { is_expected.to belong_to(:parent).optional }
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:code) }
+    it { is_expected.to validate_presence_of(:name_en) }
+    it { is_expected.to validate_presence_of(:name_km) }
+    it { is_expected.to validate_presence_of(:kind) }
+  end
 end

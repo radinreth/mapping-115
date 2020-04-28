@@ -31,7 +31,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-
+  config.include FactoryBot::Syntax::Methods
+  
   # Database cleaner config
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

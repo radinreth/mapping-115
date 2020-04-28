@@ -21,7 +21,12 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_attribute(:last_datetime) }
   it { is_expected.to have_attribute(:ncdd_code) }
 
-  describe "associations" do
+  describe 'associations' do
     it { is_expected.to belong_to(:location) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:phone_number) }
+    it { is_expected.to validate_presence_of(:ncdd_code) }
   end
 end
