@@ -56,6 +56,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    annotate (3.1.0)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -65,7 +68,14 @@ GEM
     byebug (11.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    database_cleaner (1.8.3)
+    database_cleaner-active_record (1.8.0)
+      activerecord
+      database_cleaner (~> 1.8.0)
+    diff-lcs (1.3)
     erubi (1.9.0)
+    factory_bot (5.1.1)
+      activesupport (>= 4.2.0)
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -146,6 +156,23 @@ GEM
       ffi (~> 1.0)
     request_store (1.5.0)
       rack (>= 1.4)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
+    rspec-expectations (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-rails (4.0.0)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.9)
+      rspec-expectations (~> 3.9)
+      rspec-mocks (~> 3.9)
+      rspec-support (~> 3.9)
+    rspec-support (3.9.2)
     ruby_dep (1.5.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -157,6 +184,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    shoulda-matchers (4.3.0)
+      activesupport (>= 4.2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -194,9 +223,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   bootsnap (>= 1.4.2)
   bootstrap-daterangepicker-rails
   byebug
+  database_cleaner-active_record
+  factory_bot
   gon
   jbuilder (~> 2.7)
   jquery-rails
@@ -206,7 +238,9 @@ DEPENDENCIES
   puma (~> 4.1)
   pumi
   rails (~> 6.0.2, >= 6.0.2.2)
+  rspec-rails (~> 4.0.0)
   sass-rails (>= 6)
+  shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
