@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  code          :string           not null, primary key
+#  name_en       :string           not null
+#  name_km       :string           not null
+#  kind          :string           not null
+#  parent_id     :string
+#  lat           :float
+#  lng           :float
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  callers_count :integer          default("0")
+#
 class Location < ApplicationRecord
   has_many :callers, class_name: 'User', dependent: :destroy
 
