@@ -28,7 +28,9 @@ module Api
           rescue ActiveRecord::RecordNotFound => e
             location_kind = Location.location_kind(new_code)
             loc_pumi = "pumi/#{location_kind}".classify.constantize.find_by_id(new_code) # 0812 => raise
-            @location = Location.create(code: loc_pumi.id, name_en: loc_pumi.name_latin, name_km: loc_pumi.name_km, kind: location_kind, parent_id: loc_pumi.id[0...-2])
+            if loc_pumi
+              @location = Location.create(code: loc_pumi.id, name_en: loc_pumi.name_latin, name_km: loc_pumi.name_km, kind: location_kind, parent_id: loc_pumi.id[0...-2])
+            end
           end
         end
       end
