@@ -9,7 +9,9 @@ class WelcomeController < ApplicationController
                             .where('locations.kind=?', @kind)
                             .where('users.last_datetime IS NULL OR users.last_datetime BETWEEN ? AND ?', @date_start, @date_end)
                             .where('callers_count > 0')
-                            .where.not(lat: nil).where.not(lng: nil).as_json
+                            .where.not(lat: nil)
+                            .where.not(lng: nil)
+                            .as_json
   end
 
   private

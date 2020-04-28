@@ -10,14 +10,6 @@ module Api
       else
         render json: { msg: 'fail' }
       end
-      # 1. to count, can use counter_cache?
-      # 2. to save,
-      #     "081104" => save to village
-
-      # x add popup label, count of callers
-      # x dynamic marker size
-      # district, commune lat, lng
-      # should show only if caller exist
     end
 
     private
