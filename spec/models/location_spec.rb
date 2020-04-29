@@ -30,4 +30,26 @@ RSpec.describe Location, type: :model do
     it { is_expected.to validate_presence_of(:name_km) }
     it { is_expected.to validate_presence_of(:kind) }
   end
+
+  describe '.location_kind' do
+    it 'assumes 2 digits code is `province`' do
+      kind = described_class.location_kind('01')
+      expect(kind).to eq 'province'
+    end
+
+    it 'assumes 4 digits code is `district`' do
+      kind = described_class.location_kind('0102')
+      expect(kind).to eq 'district'
+    end
+
+    it 'assumes 6 digits code is `commune`' do
+      kind = described_class.location_kind('010203')
+      expect(kind).to eq 'commune'
+    end
+
+    it 'assumes 8 digits or more code is `village`' do
+      kind = described_class.location_kind('01020304')
+      expect(kind).to eq 'village'
+    end
+  end
 end
