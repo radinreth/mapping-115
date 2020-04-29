@@ -20,4 +20,8 @@ html, body {
     right: 5px;
     text-align: right;
   }
+
+  .datepicker input {
+    min-width: 275px;
+  }
 }
