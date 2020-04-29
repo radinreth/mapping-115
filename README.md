@@ -1,6 +1,6 @@
 # README
 
-[![Coverage Status](https://coveralls.io/repos/github/radinreth/mapping-115/badge.svg?branch=master)](https://coveralls.io/github/radinreth/mapping-115?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/radinreth/mapping-115/badge.svg?v=1&branch=master)](https://coveralls.io/github/radinreth/mapping-115?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6fc5a4b1668e074709b4/maintainability)](https://codeclimate.com/github/radinreth/mapping-115/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6fc5a4b1668e074709b4/test_coverage)](https://codeclimate.com/github/radinreth/mapping-115/test_coverage)
 
