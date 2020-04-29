@@ -27,6 +27,9 @@ App.WelcomeIndex = () => {
      },
      opens: 'left'
     })
+    .on('apply.daterangepicker', function(ev, picker) {
+      $(".btn-search > a")[0].click()
+    })
   }
 
   $(".options button").click(function() {
@@ -35,9 +38,9 @@ App.WelcomeIndex = () => {
   })
 
   $(".btn-search a").click(function(e){
-    let area = $('.options button.active').text().toLowerCase()
+    let area = $('.options .btn.active').text().toLowerCase()
     let dateRange = $('input').val()
-    $(this).attr('href', `?kind=${area}&daterange=${dateRange}`)
+    $(this).attr('href', `?daterange=${dateRange}&kind=${area}`)
   })
 
   const renderMap = () => {
