@@ -1,15 +1,15 @@
 <div id="map"></div>
 <div class="options">
   <div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
-    <button class="btn btn-sm btn-outline-dark <%= active_province %>">Province</button>
-    <button class="btn btn-sm btn-outline-dark <%= active_district %>">District</button>
-    <button class="btn btn-sm btn-outline-dark <%= active_commune %>">Commune</button>
-    <button class="btn btn-sm btn-outline-dark <%= active_village %>">Village</button>
+    <%= link_to "Province", root_path(kind: 'province', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_province}" %>
+    <%= link_to "District", root_path(kind: 'district', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_district}" %>
+    <%= link_to "Commune", root_path(kind: 'commune', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_commune}" %>
+    <%= link_to "Village", root_path(kind: 'village', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_village}" %>
   </div>
-  <div class="datepicker mt-1">
-    <input name="dates" class="form-control" value="<%= @date_range %>" />
+  <div class="datepicker d-inline-flex">
+    <input name="dates" class="form-control form-control-sm" value="<%= @date_range %>" />
   </div>
-  <div class="btn-search mt-1">
+  <div class="btn-search mt-1 d-none">
     <a href="#" class="btn btn-primary">Search</a>
   </div>
 </div>
