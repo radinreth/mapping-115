@@ -19,6 +19,7 @@ gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
 gem 'sidekiq'
 gem 'rest-client'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

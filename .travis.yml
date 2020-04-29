@@ -18,5 +18,8 @@ before_script:
 script:
   - bundle exec rspec
 
+after_success:
+  - coveralls
+
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
