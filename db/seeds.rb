@@ -2,8 +2,11 @@ helper = Rails.application.routes.url_helpers
 
 puts 'Clear users...'
 User.destroy_all
+
 puts 'reset counter...'
-Location.find_each { |l| Location.reset_counters(l.code, :callers_count) }
+Location.where('callers_count > 0').find_each do |loc|
+  Location.reset_counters(loc.code, :callers_count)
+end
 
 callers = [
   { data: { Location: { LastDate: '2020/01/24', LastLocalTime: '01:17:30',
@@ -216,6 +219,8 @@ callers = [
 #                         NCDD_Code: '19010403' },
 #             phone_number: '85593555112' } }
 # ]
+
+callers = []
 
 url = helper.api_callers_url(host: 'web:3000')
 
