@@ -217,7 +217,7 @@ callers = [
 #             phone_number: '85593555112' } }
 # ]
 
-url = helper.api_callers_url(host: 'localhost:3000')
+url = helper.api_callers_url(host: 'web:3000')
 
 puts 'setup callers...'
 callers.each do |caller|

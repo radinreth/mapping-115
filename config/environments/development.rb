@@ -62,4 +62,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.hosts << /[a-z0-9]+\.ngrok\.io/
+  config.hosts << "web"
 end
