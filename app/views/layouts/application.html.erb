@@ -10,6 +10,8 @@
   </head>
 
   <body id="<%=controller_name %>_<%= action_name %>">
+    <%= render "shared/flash" %>
+    
     <%= yield %>
 
     <%= javascript_include_tag "moment" %>

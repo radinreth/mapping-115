@@ -1,0 +1,15 @@
+<div class="flash">
+  <%= link_to "sign-out", destroy_admin_session_path, class: 'd-none', method: :delete %>
+
+  <% if notice %>
+    <p class="alert alert-primary" role="alert">
+      <%= notice %>
+    </p>
+  <% end %>
+
+  <% if alert %>
+    <p class="alert alert-warning" role="alert">
+      <%= alert %>
+    </p>
+  <% end %>
+</div>
