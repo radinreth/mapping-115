@@ -51,5 +51,22 @@ RSpec.describe Location, type: :model do
       kind = described_class.location_kind('01020304')
       expect(kind).to eq 'village'
     end
+
+    describe '.query' do
+      describe 'SpotQuery' do
+        let(:user) { build(:user) }
+
+        before do
+          create(:location, code: '081104', callers: [user])
+        end
+
+        it "returns user's lat, lng" do
+          query = Location.query('spot', Time.current, 2.days.from_now)
+
+          expect(query[0]['lat']).to eq user.lat
+          expect(query[0]['lng']).to eq user.lng
+        end
+      end
+    end
   end
 end
