@@ -25,6 +25,11 @@ class Location < ApplicationRecord
   has_many :children, class_name: 'Location', foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: 'Location', optional: true
 
+  scope :spot,      -> { select('locations.code, COUNT(locations.code) AS callers_count, users.lat, users.lng').joins(:callers).group('locations.code, users.lat, users.lng') }
+  scope :province,  -> { select('locations.code, COUNT(locations.code) AS callers_count, locations.lat, locations.lng').joins("INNER JOIN users ON locations.code=SUBSTR(users.location_id, 1, 2)").group(:code) }
+  scope :district,  -> { select('locations.code, COUNT(locations.code) AS callers_count, locations.lat, locations.lng').joins("INNER JOIN users ON locations.code=SUBSTR(users.location_id, 1, 4)").group(:code) }
+  scope :commune,   -> { select('locations.code, COUNT(locations.code) AS callers_count, locations.lat, locations.lng').joins("INNER JOIN users ON locations.code=SUBSTR(users.location_id, 1, 6)").group(:code) }
+
   def self.location_kind(code)
     return if code.blank?
 
@@ -32,15 +37,15 @@ class Location < ApplicationRecord
     dict[code.length.to_s.to_sym] || 'village'
   end
 
-  def self.update_counters(id, counters)
-    super(id, counters)
+  # def self.update_counters(id, counters)
+  #   super(id, counters)
 
-    location = Location.find(id)
-    while (ancestor = location.parent.presence)
-      super(ancestor.code, counters)
-      location = ancestor
-    end
-  end
+  #   location = Location.find(id)
+  #   while (ancestor = location.parent.presence)
+  #     super(ancestor.code, counters)
+  #     location = ancestor
+  #   end
+  # end
 
   # TODO: reset_counters
   # TODO: fix counter

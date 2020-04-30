@@ -5,13 +5,7 @@ class WelcomeController < ApplicationController
     @kind = params[:kind] || 'province'
     @date_start, @date_end = @date_range.split('-')
 
-    gon.locations = Location.left_outer_joins(:callers)
-                            .where('locations.kind=?', @kind)
-                            .where('users.last_datetime IS NULL OR users.last_datetime BETWEEN ? AND ?', @date_start, @date_end)
-                            .where('callers_count > 0')
-                            .where.not(lat: nil)
-                            .where.not(lng: nil)
-                            .as_json
+    gon.locations = Location.send(@kind.to_sym)
   end
 
   private
