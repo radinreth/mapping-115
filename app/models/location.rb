@@ -25,30 +25,10 @@ class Location < ApplicationRecord
   has_many :children, class_name: 'Location', foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: 'Location', optional: true
 
-  scope :spot, -> (start_date, end_date) do
-    select('locations.code, COUNT(locations.code) AS callers_count, users.lat, users.lng')
-      .joins(:callers)
-      .where('users.lat IS NOT NULL and users.lng IS NOT NULL and users.last_datetime BETWEEN ? AND ?', start_date, end_date)
-      .group('locations.code, users.lat, users.lng')
-  end
-  scope :province, -> (start_date, end_date) do
-    select('locations.code, COUNT(locations.code) AS callers_count, locations.lat, locations.lng')
-      .joins('INNER JOIN users ON locations.code=SUBSTR(users.location_id, 1, 2)')
-      .where('users.lat IS NOT NULL and users.lng IS NOT NULL and users.last_datetime BETWEEN ? AND ?', start_date, end_date)
-      .group(:code)
-  end
-  scope :district, -> (start_date, end_date) do
-    select('locations.code, COUNT(locations.code) AS callers_count, locations.lat, locations.lng')
-      .joins('INNER JOIN users ON locations.code=SUBSTR(users.location_id, 1, 4)')
-      .where('users.lat IS NOT NULL and users.lng IS NOT NULL and users.last_datetime BETWEEN ? AND ?', start_date, end_date)
-      .group(:code)
-  end
-  scope :commune, -> (start_date, end_date) do
-    select('locations.code, COUNT(locations.code) AS callers_count, locations.lat, locations.lng')
-      .joins('INNER JOIN users ON locations.code=SUBSTR(users.location_id, 1, 6)')
-      .where('users.lat IS NOT NULL and users.lng IS NOT NULL and users.last_datetime BETWEEN ? AND ?', start_date, end_date)
-      .group(:code)
-  end
+  scope :query, lambda { |kind, start_date, end_date|
+    sql = "#{kind}Query".classify.constantize.sql(start_date, end_date)
+    connection.execute(sql)
+  }
 
   def self.location_kind(code)
     return if code.blank?
@@ -56,19 +36,6 @@ class Location < ApplicationRecord
     dict = { '2': 'province', '4': 'district', '6': 'commune' }
     dict[code.length.to_s.to_sym] || 'village'
   end
-
-  # def self.update_counters(id, counters)
-  #   super(id, counters)
-
-  #   location = Location.find(id)
-  #   while (ancestor = location.parent.presence)
-  #     super(ancestor.code, counters)
-  #     location = ancestor
-  #   end
-  # end
-
-  # TODO: reset_counters
-  # TODO: fix counter
 
   private
 
