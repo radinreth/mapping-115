@@ -13,7 +13,7 @@
 #  updated_at    :datetime         not null
 #
 class User < ApplicationRecord
-  belongs_to :location, counter_cache: :callers_count
+  belongs_to :location
 
   validates :phone_number, presence: true
   validates :ncdd_code, presence: true

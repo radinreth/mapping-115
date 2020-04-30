@@ -68,9 +68,7 @@ App.WelcomeIndex = () => {
   }
 
   const osm = () => {
-    let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-
-    // let osmUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
+    let osmUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
     let osmAttrib = "Map data © <a href='https://openstreetmap.org'>OpenStreetMap</a> contributors"
     let osm = new L.TileLayer(osmUrl, { minZoom: 5, maxZoom: 11, attribution: osmAttrib });
     return osm

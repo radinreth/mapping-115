@@ -4,7 +4,7 @@
     <%= link_to "Province", root_path(kind: 'province', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_province}" %>
     <%= link_to "District", root_path(kind: 'district', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_district}" %>
     <%= link_to "Commune", root_path(kind: 'commune', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_commune}" %>
-    <%= link_to "Village", root_path(kind: 'village', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_village}" %>
+    <%= link_to "Spot", root_path(kind: 'spot', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_spot}" %>
   </div>
   <div class="datepicker d-inline-flex">
     <input name="dates" class="form-control form-control-sm" value="<%= @date_range %>" />
