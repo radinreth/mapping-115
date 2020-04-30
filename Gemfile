@@ -20,6 +20,7 @@ gem 'bootstrap-daterangepicker-rails'
 gem 'sidekiq'
 gem 'rest-client'
 gem 'coveralls', require: false
+gem 'devise', '~> 4.7', '>= 4.7.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
