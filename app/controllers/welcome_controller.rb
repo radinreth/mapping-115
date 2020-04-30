@@ -3,9 +3,9 @@ class WelcomeController < ApplicationController
 
   def index
     @kind = params[:kind] || 'province'
-    @date_start, @date_end = @date_range.split('-')
+    @start_date, @end_date = @date_range.split('-')
 
-    gon.locations = Location.send(@kind.to_sym)
+    gon.locations = Location.send(@kind.to_sym, @start_date, @end_date)
   end
 
   private
