@@ -53,9 +53,9 @@ RSpec.describe Location, type: :model do
     end
 
     describe '.query' do
-      describe 'SpotQuery' do
-        let(:user) { build(:user) }
+      let(:user) { build(:user) }
 
+      describe 'SpotQuery' do
         before do
           create(:location, code: '081104', callers: [user])
         end
@@ -65,6 +65,45 @@ RSpec.describe Location, type: :model do
 
           expect(query[0]['lat']).to eq user.lat
           expect(query[0]['lng']).to eq user.lng
+        end
+      end
+
+      describe 'CommuneQuery' do
+        before do
+          @commune = create(:location, code: '081104', lat: 11.11, lng: 104.12, callers: [user])
+        end
+
+        it "returns commune's lat, lng" do
+          query = Location.query('commune', Time.current, 2.days.from_now)
+
+          expect(query[0]['lat']).to eq @commune.lat
+          expect(query[0]['lng']).to eq @commune.lng
+        end
+      end
+
+      describe 'DistrictQuery' do
+        before do
+          @district = create(:location, code: '0811', lat: 11.11, lng: 104.12, callers: [user])
+        end
+
+        it "returns district's lat, lng" do
+          query = Location.query('district', Time.current, 2.days.from_now)
+
+          expect(query[0]['lat']).to eq @district.lat
+          expect(query[0]['lng']).to eq @district.lng
+        end
+      end
+
+      describe 'ProvinceQuery' do
+        before do
+          @province = create(:location, code: '08', lat: 11.11, lng: 104.12, callers: [user])
+        end
+
+        it "returns province's lat, lng" do
+          query = Location.query('province', Time.current, 2.days.from_now)
+
+          expect(query[0]['lat']).to eq @province.lat
+          expect(query[0]['lng']).to eq @province.lng
         end
       end
     end
