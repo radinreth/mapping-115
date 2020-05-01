@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   devise_for :admins
   root 'welcome#index'
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :admin do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resource :manifest, only: [:show]
   resources :caller_logs, only: [:create]
   namespace :api, format: :json do
