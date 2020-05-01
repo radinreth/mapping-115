@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require_relative 'whitelist'
 
 Rails.application.routes.draw do
   devise_for :admins
@@ -9,8 +10,10 @@ Rails.application.routes.draw do
   end
 
   resource :manifest, only: [:show]
-  resources :caller_logs, only: [:create]
-  namespace :api, format: :json do
-    resources :callers, only: [:create]
+  constraints Whitelist.new do
+    resources :caller_logs, only: [:create]
+    namespace :api, format: :json do
+      resources :callers, only: [:create]
+    end
   end
 end
