@@ -6,7 +6,7 @@ RSpec.describe WelcomeController, type: :controller do
   context 'NOT admin_signed_in?' do
     it 'return empty locations' do
       get :index
-      expect(gon['locations']).to eq []
+      expect(response).to redirect_to('/admins/sign_in')
     end
   end
 
