@@ -4,7 +4,7 @@ class Whitelist
   end
 
   def self.allowed_hosts
-    ['verboice.com', 'localhost']
+    ENV['ALLOWED_HOSTS'].split(',').map(&:strip)
   end
 
   private
