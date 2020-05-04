@@ -55,6 +55,7 @@ Rails.application.configure do
   config.assets.compile = true
 
   config.action_mailer.default_url_options = { host: 'web', port: 3000 }
+  config.action_controller.default_url_options = { host: 'https://115-map.cdcmoh.gov.kh' }
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
