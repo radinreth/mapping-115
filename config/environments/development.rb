@@ -64,6 +64,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.hosts << /[a-z0-9]+\.ngrok\.io/
-  config.hosts << "owso.instedd.org"
+  config.hosts << "115-map.cdcmoh.gov.kh"
   config.hosts << "web"
 end
