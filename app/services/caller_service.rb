@@ -13,7 +13,7 @@ class CallerService
       # save end-result to mapping-115
       RestClient.post helper.api_callers_url(host: 'web:3000'), response, accept: :json, content_type: :json
     rescue StandardError => e
-      Rails.logger.debug "Request failed: #{e.message}"
+      Rails.logger.debug "CallerService Request failed: #{e.message} #{phone_number}"
     end
   end
 end
