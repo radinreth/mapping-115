@@ -9,7 +9,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
 
 # Install dependencies
 RUN apt-get update && \
-  apt-get install -y nodejs yarn postgresql-client && \
+  apt-get install -y nodejs yarn postgresql-client vim && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

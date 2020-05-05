@@ -1,6 +1,7 @@
 class Whitelist
   def matches?(request)
-    klass.allowed_hosts.include?(request.remote_ip) || request.host == 'localhost'
+    Rails.logger.debug "++++ #{request.remote_ip} #{request.host} ++++"
+    klass.allowed_hosts.include?(request.remote_ip) || request.host == 'web'
   end
 
   def self.allowed_hosts

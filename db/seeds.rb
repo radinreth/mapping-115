@@ -226,7 +226,7 @@ callers = [
 
 # callers = []
 
-url = helper.api_callers_url(host: 'web:3000')
+url = helper.api_callers_url(host: 'web')
 
 puts 'setup callers...'
 callers.each do |caller|

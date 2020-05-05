@@ -32,6 +32,10 @@ module Mapping115
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # sentry
+    config.dsn = 'https://6bb387b897e84f09a2e295436e0cfb78:77565ce0427048d19cedf3a133f38997@o59519.ingest.sentry.io/5224619'
+    config.filter_parameters << :password
+
     console do
       ActiveRecord::Base.connection
     end
