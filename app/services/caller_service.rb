@@ -3,6 +3,7 @@ require 'rest-client'
 class CallerService
   def self.run(phone_number)
     helper = Rails.application.routes.url_helpers
+    phone_number = phone_number.sub(/^0?/, '855')
 
     begin
       # get payload from external service
