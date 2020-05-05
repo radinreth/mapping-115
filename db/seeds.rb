@@ -219,9 +219,9 @@ callers = [
                         NCDD_Code: '081104' },
             phone_number: '85593555225' } },
   { data: { Location: { LastDate: '2020/04/25', LastLocalTime: '18:17:30',
-              Latitude: 11.45508, Longitude: 104.95488,
-              NCDD_Code: '081104' },
-            phone_number: '85510666557' } },          
+                        Latitude: 11.45508, Longitude: 104.95488,
+                        NCDD_Code: '081104' },
+            phone_number: '85510666557' } }
 ]
 
 # callers = []
