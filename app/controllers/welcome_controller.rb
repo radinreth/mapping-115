@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
     @kind = params[:kind] || 'spot'
     @start_date, @end_date = @date_range.split('-')
 
-    gon.locations = admin_signed_in? ? Location.send(:query, @kind, @start_date, @end_date) : []
+    gon.locations = Location.send(:query, @kind, @start_date, @end_date)
   end
 
   private
