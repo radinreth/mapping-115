@@ -3,6 +3,7 @@
 module Api
   class CallersController < ApplicationController
     before_action :set_location
+    skip_before_action :authenticate_admin!
     skip_before_action :verify_authenticity_token
 
     def create

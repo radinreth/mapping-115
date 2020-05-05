@@ -4,6 +4,10 @@ volumes:
   bundle:
   node_modules:
   db:
+  nginx-certs:
+  nginx-dhparam:
+  nginx-vhost:
+  nginx-html:
 
 services:
   db:
@@ -17,7 +21,7 @@ services:
   web: &rails
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
       - .:/app
@@ -28,10 +32,18 @@ services:
       - db
       - redis
     env_file: app.env
+    environment:
+      - LANG=C.UTF-8
+      - RAILS_SERVE_STATIC_FILES=true
+      - VIRTUAL_HOST=115-map.cdcmoh.gov.kh
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=115-map.cdcmoh.gov.kh
+      - LETSENCRYPT_EMAIL=kakada@instedd.org
     tty: true
     stdin_open: true
-    ports:
-      - "3000:3000"
+
+    expose:
+      - "3000"
 
   redis:
     image: redis:5.0.7
@@ -41,3 +53,30 @@ services:
     command: bundle exec sidekiq
     ports: []
 
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs:ro
+      - nginx-dhparam:/etc/nginx/dhparam
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    depends_on:
+      - web
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs:rw
+      - nginx-dhparam:/etc/nginx/dhparam
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html

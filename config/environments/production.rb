@@ -61,6 +61,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "mapping_115_production"
 
   config.action_mailer.perform_caching = false
+  config.action_controller.default_url_options = { host: 'https://115-map.cdcmoh.gov.kh' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -1,6 +1,6 @@
 class Whitelist
   def matches?(request)
-    klass.allowed_hosts.include?(request.host)
+    klass.allowed_hosts.include?(request.remote_ip)
   end
 
   def self.allowed_hosts
