@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4 offset-md-4">
-      <h1 class="mt-5"><%= t('.sign_in') %></h1>
+      <div class="text-center logo">
+        <%= image_tag "moh-logo.png", size: '97x105' %>
+        <%= image_tag "cdc-logo.jpg", size: '105x105' %>
+      </div>
+
+      <h1 class="text-center"><%= t('.sign_in') %></h1>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">

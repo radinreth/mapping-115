@@ -4,3 +4,14 @@
   right: 5px;
   top: 60px;
 }
+
+.logo {
+  @extend .text-center; 
+  @extend .mt-5;
+  @extend .mb-3;
+
+  img {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
