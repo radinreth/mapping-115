@@ -6,9 +6,9 @@
 }
 
 .logo {
-  @extend .text-center; 
-  @extend .mt-5;
-  @extend .mb-3;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 
   img {
     display: inline-block;
