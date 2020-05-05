@@ -55,7 +55,6 @@ Rails.application.configure do
   config.assets.compile = true
 
   config.action_mailer.default_url_options = { host: 'web', port: 3000 }
-  config.action_controller.default_url_options = { host: 'https://115-map.cdcmoh.gov.kh' }
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
@@ -64,7 +63,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.hosts << /[a-z0-9]+\.ngrok\.io/
-  config.hosts << "115-map.cdcmoh.gov.kh"
-  config.hosts << "web"
+  config.hosts << '115-map.cdcmoh.gov.kh'
+  config.hosts << 'web'
 end
