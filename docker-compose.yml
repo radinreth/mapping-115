@@ -39,6 +39,7 @@ services:
       - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=115-map.cdcmoh.gov.kh
       - LETSENCRYPT_EMAIL=kakada@instedd.org
+      - CALL_LOGS_FETCH_INTERVAL=5
     tty: true
     stdin_open: true
 

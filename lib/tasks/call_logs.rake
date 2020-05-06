@@ -7,7 +7,7 @@ namespace :call_logs do
   task fetch: :environment do
     interval = 0
     CSV.foreach('lib/samples/call_logs.csv', headers: true) do |row|
-      interval += 5
+      interval += ENV['CALL_LOGS_FETCH_INTERVAL'].to_i
       hash = row.to_hash
       phone_number = hash['Caller ID']
       p "Logging: #{phone_number}..."
