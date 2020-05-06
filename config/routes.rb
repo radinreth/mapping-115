@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resource :manifest, only: [:show]
   constraints Whitelist.new do
-    resources :caller_logs, only: [:create]
+    resources :caller_logs, path: 'caller_locations', only: [:create]
     namespace :api, format: :json do
       resources :callers, only: [:create]
     end
