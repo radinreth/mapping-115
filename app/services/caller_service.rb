@@ -9,10 +9,11 @@ class CallerService
       # get payload from external service
       uri = "#{ENV['TELCO_URL']}/#{phone_number}?token=#{ENV['TOKEN']}"
       response = RestClient.get uri, open_timeout: 3
-      response[:data][:last_datetime] = last_datetime
+      parsed = JSON.parse(response.body)
+      parsed['data']['last_datetime'] = last_datetime
 
       # save end-result to mapping-115
-      RestClient.post helper.api_callers_url(host: 'web'), response, accept: :json, content_type: :json
+      RestClient.post helper.api_callers_url(host: 'web'), parsed, accept: :json, content_type: :json
     rescue StandardError => e
       Rails.logger.debug "CallerService Request failed: #{e.message} #{phone_number}"
     end
