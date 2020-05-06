@@ -36,6 +36,8 @@ module Mapping115
     config.dsn = 'https://6bb387b897e84f09a2e295436e0cfb78:77565ce0427048d19cedf3a133f38997@o59519.ingest.sentry.io/5224619'
     config.filter_parameters << :password
 
+    config.time_zone = 'Bangkok'
+
     console do
       ActiveRecord::Base.connection
     end
