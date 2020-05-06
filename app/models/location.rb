@@ -17,6 +17,7 @@ class Location < ApplicationRecord
   has_many :callers, class_name: 'User', dependent: :destroy
 
   validates :code, :name_en, :name_km, :kind, presence: true
+  validates :code, uniqueness: true
   validates_inclusion_of :kind, in: %w[province district commune village], message: 'type %{value} is invalid'
   validates :lat, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 }, allow_blank: true
   validates :lng, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }, allow_blank: true
