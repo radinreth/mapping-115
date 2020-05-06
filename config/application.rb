@@ -37,6 +37,7 @@ module Mapping115
     config.filter_parameters << :password
 
     config.time_zone = 'Bangkok'
+    config.active_record.default_timezone = :local
 
     console do
       ActiveRecord::Base.connection

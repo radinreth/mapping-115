@@ -11,6 +11,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     }
 
     hash = {
+      'last_datetime': '2020/04/26 18:17:30',
       'phone_number': '85593555112',
       'Location': ActionController::Parameters.new(loc_params)
     }
