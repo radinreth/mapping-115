@@ -1,5 +1,6 @@
 <div id="map"></div>
 <div class="options">
+  <h6 class="d-inline">ចំនួនតេសរុប: <%= @callers_count %></h6>
   <div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
     <%= link_to "Province", root_path(kind: 'province', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_province}" %>
     <%= link_to "District", root_path(kind: 'district', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_district}" %>

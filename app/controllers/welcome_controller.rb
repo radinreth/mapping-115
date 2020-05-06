@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
   def index
     @kind = params[:kind] || 'spot'
     @start_date, @end_date = @date_range.split('-')
-
+    @callers_count = User.where.not(lat: nil, lng: nil).count
     gon.locations = Location.send(:query, @kind, @start_date, @end_date)
   end
 
