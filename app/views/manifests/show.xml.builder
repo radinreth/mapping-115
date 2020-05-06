@@ -7,9 +7,6 @@ xml.tag! "mapping" do
 
   xml.steps do
     xml.step name: "caller", icon: "gear", type: "callback", "display-name": "caller log", "callback-url": "http://{service_domain}/caller_logs/" do
-      xml.settings do
-        xml.variable name: "caller_log", "display-name": "caller log", type: "string"
-      end
       xml.response type: "none"
     end
   end
