@@ -11,7 +11,13 @@ Rails.application.routes.draw do
 
   resource :manifest, only: [:show]
   constraints Whitelist.new do
-    resources :caller_logs, path: 'caller_locations', only: [:create]
+    resources :caller_logs, path: 'caller_locations', only: [:create] do
+      collection do
+        resource :csv,  only: %i[new create],
+                        as: :caller_logs_csv,
+                        path_names: { new: 'upload' }
+      end
+    end
     namespace :api, format: :json do
       resources :callers, only: [:create]
     end
