@@ -13,7 +13,7 @@ class CallerService
       parsed['data']['last_datetime'] = last_datetime
 
       # save end-result to mapping-115
-      RestClient.post helper.api_callers_url(host: 'web'), parsed, accept: :json, content_type: :json
+      RestClient.post helper.api_callers_url(host: 'web:3000'), parsed, accept: :json, content_type: :json
     rescue StandardError => e
       Rails.logger.debug "CallerService Request failed: #{e.message} #{phone_number}"
     end
