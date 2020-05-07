@@ -10,6 +10,9 @@
   <div class="datepicker d-inline-flex">
     <input name="dates" class="form-control form-control-sm" value="<%= @date_range %>" />
   </div>
+  <div class="mt-1">
+    <%= link_to "Upload Call Logs", new_caller_logs_csv_path, class: 'btn btn-primary btn-sm' %>
+  </div>
   <div class="btn-search mt-1 d-none">
     <a href="#" class="btn btn-primary">Search</a>
   </div>
