@@ -64,6 +64,8 @@ App.WelcomeIndex = () => {
       }).addTo(map)
 
       marker.bindPopup(`ចំនួនតេចូល:${callersCount}`)
+      marker.on('mouseover', function() { this.openPopup() })
+      marker.on('mouseout', function() { this.closePopup() })
     })
   }
 
