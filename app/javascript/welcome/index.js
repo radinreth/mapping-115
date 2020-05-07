@@ -63,9 +63,11 @@ App.WelcomeIndex = () => {
         radius: (increasedSize > maxRadiusSize ? maxRadiusSize : increasedSize)
       }).addTo(map)
 
-      marker.bindPopup(`ចំនួនតេចូល:${callersCount}`)
+      marker.bindPopup(`
+        <strong class="location-title">${loc.name}</strong>
+        <p class="m-0">ចំនួនតេចូល:${callersCount}</p>
+      `)
       marker.on('mouseover', function() { this.openPopup() })
-      marker.on('mouseout', function() { this.closePopup() })
     })
   }
 
