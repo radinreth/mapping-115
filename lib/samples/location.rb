@@ -6,7 +6,7 @@ module Samples
   class Location
 
     def self.load
-      %w[locations locations-full].each do |filename|
+      %w[locations].each do |filename|
         load_from_file(filename)
       end
     end

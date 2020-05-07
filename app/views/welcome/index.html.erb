@@ -1,6 +1,8 @@
 <div id="map"></div>
 <div class="options">
-  <h6 class="d-inline">ចំនួនតេសរុប: <%= @callers_count %></h6>
+  <% if @locations.count > 0 %>
+    <h6 class="d-inline">ចំនួនតេសរុប: <%= @callers_count %></h6>
+  <% end %>
   <div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
     <%= link_to "Province", root_path(kind: 'province', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_province}" %>
     <%= link_to "District", root_path(kind: 'district', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_district}" %>
@@ -9,6 +11,9 @@
   </div>
   <div class="datepicker d-inline-flex">
     <input name="dates" class="form-control form-control-sm" value="<%= @date_range %>" />
+  </div>
+  <div class="mt-1">
+    <%= link_to "Upload Call Logs", new_caller_logs_csv_path, class: 'btn btn-primary btn-sm' %>
   </div>
   <div class="btn-search mt-1 d-none">
     <a href="#" class="btn btn-primary">Search</a>
