@@ -3,7 +3,11 @@ class CallerLogsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    CallerWorker.perform_async(params[:address], Time.current)
+    options = {
+      call_id: params['CallSid'].to_i,
+      last_datetime: Time.current
+    }
+    CallerWorker.perform_async(params[:address], options)
     render json: { msg: 'ok' }, status: :ok
   end
 end

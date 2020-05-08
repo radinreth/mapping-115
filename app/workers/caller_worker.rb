@@ -1,7 +1,7 @@
 class CallerWorker
   include Sidekiq::Worker
 
-  def perform(phone_number, last_datetime)
-    CallerService.run(phone_number, last_datetime)
+  def perform(phone_number, options)
+    CallerService.run(phone_number, options)
   end
 end

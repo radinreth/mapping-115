@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def mapper
-    @mapper ||= { phone_number: 'phone_number', last_datetime: 'last_datetime', Latitude: 'lat', Longitude: 'lng', NCDD_Code: 'ncdd_code' }
+    @mapper ||= { phone_number: 'phone_number', last_datetime: 'last_datetime', call_id: 'call_id', Latitude: 'lat', Longitude: 'lng', NCDD_Code: 'ncdd_code' }
     @mapper.with_indifferent_access
   end
 end
