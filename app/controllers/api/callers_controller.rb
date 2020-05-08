@@ -51,7 +51,7 @@ module Api
     end
 
     def raw_params
-      params.permit(data: [:phone_number, :last_datetime, :call_id, Location: %i[Latitude Longitude NCDD_Code]])
+      params.permit(data: [:phone_number, :last_datetime, :call_id, Location: %i[Detail Latitude Longitude NCDD_Code]])
     end
 
     def caller_params
