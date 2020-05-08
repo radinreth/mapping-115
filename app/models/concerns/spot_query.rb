@@ -1,7 +1,7 @@
 class SpotQuery
   def self.sql(start_date, end_date)
     Location.unscoped
-            .select('locations.name_km AS name, locations.code, COUNT(locations.code) AS callers_count, users.lat, users.lng')
+            .select('users.location_detail AS name, locations.code, COUNT(locations.code) AS callers_count, users.lat, users.lng')
             .joins(:callers)
             .where.not(users: { lat: nil })
             .where.not(users: { lng: nil })
