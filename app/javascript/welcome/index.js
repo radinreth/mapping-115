@@ -71,7 +71,7 @@ App.WelcomeIndex = () => {
         fillOpacity: 0.8,
         weight: 1,
         opacity: 1,
-        radius: (increasedSize > maxRadiusSize ? maxRadiusSize : increasedSize)
+        radius: minRadiusSize + callersCount * 10 / gon.indicator.max
       }).addTo(map)
 
       marker.bindPopup(`
