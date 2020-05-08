@@ -50,13 +50,23 @@ App.WelcomeIndex = () => {
   }
 
   const renderMarkers = () => {
+    let color = {
+      red: { name: 'red', fill: '#d62828' },
+      green: { name: 'green', fill: '#02c39a' },
+      orange: { name: 'orange', fill: '#fb5607' }
+    }
+
     gon.locations.forEach((loc) => {
       callersCount = loc.callers_count
       increasedSize = defaultRadiusSize + callersCount
 
+      let key = 'red'
+      if( callersCount <= gon.indicator.max1 ) key = 'green'
+      else if (callersCount <= gon.indicator.max2 ) key = 'orange'
+
       let marker = L.circleMarker([loc.lat, loc.lng], {
-        color: (callersCount == 0 ?"#004e98" : "red"),
-        fillColor: (callersCount == 0 ?"#3a6ea5" : "#d62828"),
+        color: color[key].name,
+        fillColor: color[key].fill,
         fillOpacity: 0.8,
         weight: 1,
         opacity: 1,
