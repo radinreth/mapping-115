@@ -28,5 +28,16 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:phone_number) }
     it { is_expected.to validate_presence_of(:ncdd_code) }
+
+    describe ':call_id' do
+      let(:location) { create(:location) }
+      before do
+        create(:user, location: location, call_id: 123)
+      end
+
+      it 'raises error' do
+        expect { create(:user, location: location, call_id: 123) }.to raise_error(/taken/)
+      end
+    end
   end
 end

@@ -17,4 +17,5 @@ class User < ApplicationRecord
 
   validates :phone_number, presence: true
   validates :ncdd_code, presence: true
+  validates :call_id, uniqueness: true
 end
