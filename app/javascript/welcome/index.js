@@ -75,7 +75,7 @@ App.WelcomeIndex = () => {
       }).addTo(map)
 
       marker.bindPopup(`
-        <strong class="location-title">${loc.name}</strong>
+        <strong class="location-title">${loc.name || loc.name_km}</strong>
         <p class="m-0">ចំនួនតេចូល:${callersCount}</p>
       `)
       marker.on('mouseover', function() { this.openPopup() })
