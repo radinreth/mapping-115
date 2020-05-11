@@ -2,7 +2,6 @@ App.WelcomeIndex = () => {
   let map = null
   let defaultRadiusSize = 5
   let minRadiusSize = 1
-  let maxRadiusSize = 18
   let SW = [10.4865436874, 102.3480994]
   let NE = [14.5705838078, 107.614547968]
 

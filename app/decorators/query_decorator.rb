@@ -7,8 +7,12 @@ class QueryDecorator
     @end_date = options[:end_date]
   end
 
-  def callers_count
-    @callers_count ||= ::User.where.not(lat: nil, lng: nil).count
+  def all_count
+    callers_count.first['count']
+  end
+
+  def inperiod_count
+    callers_count.last['count']
   end
 
   def locations
@@ -22,6 +26,13 @@ class QueryDecorator
   end
 
   private
+
+  def callers_count
+    User.connection.execute(" SELECT COUNT(*) FROM users
+                              UNION ALL
+                              SELECT COUNT(*) FROM users
+                                WHERE last_datetime BETWEEN '#{start_date}' AND '#{end_date}'").to_a
+  end
 
   def max_count
     locations.max_by { |loc| loc['callers_count'] }['callers_count'] rescue nil

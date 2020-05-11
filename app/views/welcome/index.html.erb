@@ -1,7 +1,7 @@
 <div id="map"></div>
 <div class="options">
   <% if @query.locations.count > 0 %>
-    <h6 class="d-inline">ចំនួនតេសរុប: <%= @query.callers_count %></h6>
+    <p class="d-inline" style="font-size: 18px">បង្ហាញចំនួនតេ <%= @query.inperiod_count %> ក្នុង <%= @query.all_count %></p>
   <% end %>
   <div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
     <%= link_to "Province", root_path(kind: 'province', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_province}" %>
