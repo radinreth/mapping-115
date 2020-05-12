@@ -4,6 +4,7 @@ volumes:
   bundle:
   node_modules:
   db:
+  rdb:
   nginx-certs:
   nginx-dhparam:
   nginx-vhost:
@@ -48,6 +49,8 @@ services:
 
   redis:
     image: redis:5.0.7
+    volumes:
+      - rdb:/data
 
   sidekiq:
     <<: *rails

@@ -5,7 +5,7 @@ class SpotQuery
             .joins(:callers)
             .where.not(users: { lat: nil })
             .where.not(users: { lng: nil })
-            .where(users: { last_datetime: start_date..end_date })
+            .where('DATE(last_datetime) BETWEEN ? AND ?', start_date, end_date)
             .group('users.location_detail, locations.code, users.lat, users.lng').to_sql
   end
 end

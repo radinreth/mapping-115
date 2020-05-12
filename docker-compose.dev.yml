@@ -4,6 +4,7 @@ volumes:
   bundle:
   node_modules:
   db:
+  rdb:
 
 services:
   db:
@@ -35,6 +36,8 @@ services:
 
   redis:
     image: redis:5.0.7
+    volumes:
+      - rdb:/data
 
   sidekiq:
     <<: *rails

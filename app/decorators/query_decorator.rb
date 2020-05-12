@@ -31,7 +31,7 @@ class QueryDecorator
     User.connection.execute(" SELECT COUNT(*) FROM users
                               UNION ALL
                               SELECT COUNT(*) FROM users
-                                WHERE last_datetime BETWEEN '#{start_date}' AND '#{end_date}'").to_a
+                                WHERE DATE(last_datetime) BETWEEN '#{start_date}' AND '#{end_date}'").to_a
   end
 
   def max_count
