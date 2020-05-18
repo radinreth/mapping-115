@@ -21,12 +21,40 @@ html, body {
     text-align: right;
   }
 
+  .legend {
+    z-index: 999;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: 1px solid #949494;
+    padding: 10px 15px;
+    border-radius: 4px;
+
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      line-height: 23px;
+    }
+
+    .color {
+      vertical-align: middle;
+      font-size: 45%;
+    }
+
+    .desc {
+      font-size: 0.7rem;
+    }
+  }
+
   .datepicker input {
     min-width: 275px;
   }
 
   .location-title {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     margin-bottom: 5px;
+    font-weight: bold;
   }
 }

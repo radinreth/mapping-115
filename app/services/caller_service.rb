@@ -1,7 +1,7 @@
 require 'rest-client'
 
 class CallerService
-  def self.run(phone_number, options={})
+  def self.run(phone_number, options = {})
     helper = Rails.application.routes.url_helpers
     phone_number = phone_number.sub(/^0?/, '855')
 

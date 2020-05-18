@@ -14,6 +14,15 @@
 #  callers_count :integer          default("0")
 #
 class Location < ApplicationRecord
+  MISSING_LOCATION = {
+    code: '00000000',
+    lat: 10.842453,
+    lng: 101.807212,
+    name_en: 'UNKNOWN',
+    name_km: 'UNKNOWN',
+    kind: 'village'
+  }.freeze
+
   has_many :callers, class_name: 'User', dependent: :destroy
 
   validates :code, :name_en, :name_km, :kind, presence: true
@@ -36,6 +45,10 @@ class Location < ApplicationRecord
 
     dict = { '2': 'province', '4': 'district', '6': 'commune' }
     dict[code.length.to_s.to_sym] || 'village'
+  end
+
+  def self.missing_location
+    create(MISSING_LOCATION)
   end
 
   private

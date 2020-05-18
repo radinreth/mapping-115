@@ -1,12 +1,12 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
   <div class="card">
     <div class="card-header ">
-      <h5>Choose Call Logs</h5>
+      <h5>ជ្រើសរើសឯកសារ</h5>
     </div>
     <div class="card-body">
       <%= simple_form_for :call_logs, url: caller_logs_csv_path do |f| %>
         <%= f.input :file, as: :file, label: false %>
-        <%= f.submit "Import", class: "btn btn-primary mt-2" %>
+        <%= f.submit "បញ្ជូន", class: "btn btn-primary mt-2" %>
       <% end %>
     </div>
   </div>

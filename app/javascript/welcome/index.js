@@ -38,7 +38,7 @@ App.WelcomeIndex = () => {
   })
 
   $(".btn-search a").click(function(e){
-    let area = $('.options .btn.active').text().toLowerCase()
+    let area = $('.options .btn.active').data('kind').toLowerCase()
     let dateRange = $('input').val()
     $(this).attr('href', `?daterange=${dateRange}&kind=${area}`)
   })
@@ -51,9 +51,9 @@ App.WelcomeIndex = () => {
 
   const renderMarkers = () => {
     let color = {
-      red: { name: 'red', fill: '#d62828' },
+      red: { name: 'red', fill: '#e71d36' },
       green: { name: 'green', fill: '#02c39a' },
-      orange: { name: 'orange', fill: '#fb5607' }
+      orange: { name: 'orange', fill: '#ffbe0b' }
     }
 
     gon.locations.forEach((loc) => {
@@ -61,16 +61,16 @@ App.WelcomeIndex = () => {
       increasedSize = defaultRadiusSize + callersCount
 
       let key = 'red'
-      if( callersCount <= gon.indicator.max1 ) key = 'green'
-      else if (callersCount <= gon.indicator.max2 ) key = 'orange'
+      if( callersCount <= gon.indicator.mid ) key = 'green'
+      else if (callersCount <= gon.indicator.max ) key = 'orange'
 
       let marker = L.circleMarker([loc.lat, loc.lng], {
         color: color[key].name,
         fillColor: color[key].fill,
-        fillOpacity: 0.8,
+        fillOpacity: 0.9,
         weight: 1,
         opacity: 1,
-        radius: minRadiusSize + callersCount * 10 / gon.indicator.max
+        radius: minRadiusSize + (callersCount * gon.indicator.coef / gon.indicator.max)
       }).addTo(map)
 
       marker.bindPopup(`

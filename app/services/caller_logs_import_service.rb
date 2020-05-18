@@ -11,8 +11,11 @@ class CallerLogsImportService
         call_id: hash['ID'].to_i,
         last_datetime: Time.zone.parse(hash['Started'])
       }
-      p "Logging: #{phone_number}..."
-      CallerWorker.perform_in(interval.seconds, phone_number, options)
+
+      unless ::User.exists?(call_id: options[:call_id])
+        p "Logging: #{phone_number}..."
+        CallerWorker.perform_in(interval.seconds, phone_number, options)
+      end
     end
   end
 end

@@ -7,7 +7,11 @@ class CallerLogsController < ApplicationController
       call_id: params['CallSid'].to_i,
       last_datetime: Time.current
     }
-    CallerWorker.perform_async(params[:address], options)
+
+    unless ::User.exists?(call_id: options[:call_id])
+      CallerWorker.perform_async(params['address'], options)
+    end
+
     render json: { msg: 'ok' }, status: :ok
   end
 end

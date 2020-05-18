@@ -22,10 +22,23 @@ class QueryDecorator
   def indicator
     return unless max_count
 
-    { max1: (max_count / 3), max2: (max_count / 3) * 2, max: max_count }
+    send "#{kind}_indicator".to_sym
   end
 
   private
+
+  def province_indicator
+    { coef: 5, mid: 500, max: 1000 }
+  end
+
+  def district_indicator
+    { coef: 10, mid: 500, max: 1000 }
+  end
+
+  def commune_indicator
+    { coef: 15, mid: 250, max: 500 }
+  end
+  alias spot_indicator commune_indicator
 
   def callers_count
     User.connection.execute(" SELECT COUNT(*) FROM users
