@@ -22,4 +22,8 @@ module ApplicationHelper
       NCDD_Code: 'ncdd_code'
     }.with_indifferent_access
   end
+
+  def get_css_active_class(name)
+    return 'active' if params['controller'] == name
+  end
 end

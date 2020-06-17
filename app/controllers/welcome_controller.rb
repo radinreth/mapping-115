@@ -1,5 +1,4 @@
 class WelcomeController < ApplicationController
-  before_action :authenticate_admin!
   before_action :set_daterange
   before_action :set_options
 

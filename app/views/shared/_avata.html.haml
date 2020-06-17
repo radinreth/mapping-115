@@ -1,0 +1,8 @@
+.btn-group
+  .avata.d-flex.justify-content-center.align-items-center{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+    = current_admin.email[0]
+
+  .dropdown-menu.dropdown-menu-right
+    = link_to "បញ្ជូនឯកសារ", new_caller_logs_csv_path, class: 'dropdown-item'
+    .dropdown-divider
+    = link_to "ចាកចេញ", destroy_admin_session_path, method: :delete, class: 'dropdown-item'

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_raven_context
+  before_action :authenticate_admin!
 
   private
 

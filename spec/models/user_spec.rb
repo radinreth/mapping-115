@@ -40,4 +40,13 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'before_crate #assign_locations' do
+    let!(:location) { create(:location, code: '01020304') }
+    let(:user) { create(:user, location_id: location.code) }
+
+    it { expect(user.province_id).to eq('01') }
+    it { expect(user.district_id).to eq('0102') }
+    it { expect(user.commune_id).to eq('010203') }
+  end
 end
