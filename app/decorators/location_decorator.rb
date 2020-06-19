@@ -1,8 +1,8 @@
 class LocationDecorator
   def initialize(options={})
-    @province_id = options[:province_id]
-    @district_id = options[:district_id]
-    @commune_id = options[:commune_id]
+    @parent_id = options[:parent_id]
+    @parent_kind = Location.location_kind(@parent_id)
+    @child_kind  = child_kinds[@parent_kind]
   end
 
   def provinces
@@ -12,26 +12,40 @@ class LocationDecorator
     format_data(locations, group_data)
   end
 
-  def districts
-    locations = Location.where(parent_id: @province_id, kind: 'district')
-    group_data = User.where(province_id: @province_id).group(:district_id).count
+  def get_data
+    return [] unless @child_kind.present?
 
-    format_data(locations, group_data)
-  end
-
-  def communes
-    locations = Location.where(parent_id: @district_id, kind: 'district')
-    group_data = User.where(district_id: @district_id).group(:commune_id).count
+    locations = Location.where(location_params)
+    group_data = User.where(user_params).group("#{@child_kind}_id".to_sym).count
 
     format_data(locations, group_data)
   end
 
   private
+    def child_kinds
+      { 'province' => 'district', 'district' => 'commune' }
+    end
+
     def format_data(locations, group_data)
-      locations.each do |location|
-        location.callers_count = group_data[location.code]
+      jsonData = locations.as_json
+      jsonData.each_with_index do |location, index|
+        location['callers_count'] = group_data[location['code']]
+        location['text'] = "#{location['code']}. #{location['name_km']} (#{location['callers_count']})"
+        location['children'] = @child_kind == 'commune' ? false : locations[index].children.present?
+        location['id'] = location['code']
+        location['icon'] = ActionController::Base.helpers.image_path('favicon.ico')
       end
 
-      locations
+      jsonData
+    end
+
+    def location_params
+      { parent_id: @parent_id, kind: @child_kind }
+    end
+
+    def user_params
+      params = {}
+      params["#{@parent_kind}_id".to_sym] = @parent_id
+      params
     end
 end

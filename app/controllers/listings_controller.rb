@@ -3,15 +3,13 @@ class ListingsController < ApplicationController
     @provinces = LocationDecorator.new.provinces
   end
 
-  def districts
-    query = LocationDecorator.new(province_id: params[:province_id])
-
-    render json: query.districts
+  def provinces
+    render json: LocationDecorator.new.provinces
   end
 
-  def communes
-    query = LocationDecorator.new(district_id: params[:district_id])
+  def child_locations
+    query = LocationDecorator.new(parent_id: params[:id])
 
-    render json: query.communes
+    render json: query.get_data
   end
 end

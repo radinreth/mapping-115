@@ -4,17 +4,10 @@
   = render 'shared/avata'
 
 #content.d-flex
-  .content.flex-grow-1
-    #container
-      %ul
-        %li
-          Root node
-          %ul
-            %li Child node 1
-            %li Child node 2
-    %ul
-      - @provinces.each do |province|
-        %li= "#{province.name_km} (#{province.callers_count})"
+  .graph.mr-4
+    %canvas#myChart{'data-provinces' => @provinces.to_json}
 
-  .grap.flex-grow-1
-    grap
+  .content.flex-grow-1
+    #tree
+
+
