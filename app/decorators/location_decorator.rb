@@ -50,7 +50,7 @@ class LocationDecorator
     end
 
     def icons
-      { 'province' => 'phd.png', 'district' => 'od.png', 'commune' => 'cd.png' }
+      { 'province' => 'phd.png', 'district' => 'od.png', 'commune' => 'hc.png' }
     end
 
     def user_params
