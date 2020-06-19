@@ -33,7 +33,7 @@ class LocationDecorator
         location['text'] = "#{location['code']}. #{location['name_km']} (#{location['callers_count']})"
         location['children'] = @child_kind == 'commune' ? false : locations[index].children.present?
         location['id'] = location['code']
-        location['icon'] = ActionController::Base.helpers.image_path('favicon.ico')
+        location['icon'] = ActionController::Base.helpers.image_url(icon)
       end
 
       jsonData
@@ -41,6 +41,16 @@ class LocationDecorator
 
     def location_params
       { parent_id: @parent_id, kind: @child_kind }
+    end
+
+    def icon
+      return icons['province'] if @parent_id.nil?
+
+      icons[@child_kind]
+    end
+
+    def icons
+      { 'province' => 'phd.png', 'district' => 'od.png', 'commune' => 'cd.png' }
     end
 
     def user_params
