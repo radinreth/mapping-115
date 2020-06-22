@@ -13,9 +13,7 @@
       = link_to "ឃុំ", root_path(kind: 'commune', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_commune}", 'data-kind': 'commune'
       = link_to "អង់តែន", root_path(kind: 'spot', daterange: @date_range), class: "btn btn-sm btn-outline-dark #{active_spot}", 'data-kind': 'spot'
 
-  .datepicker.d-inline-flex.mr-2
-    %input.form-control.form-control-sm{:name => "dates", :value => "#{@date_range}"}/
-
+  = render 'shared/date_filter'
   = render 'shared/avata'
 
   .btn-search.mt-1.d-none

@@ -9,9 +9,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :listings, only: [:index] do
-    get :locations, on: :collection
-  end
+  resources :listings, only: [:index]
 
   resource :manifest, only: [:show]
   constraints Whitelist.new do

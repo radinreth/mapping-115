@@ -1,4 +1,4 @@
 .swicth-views
   .btn-group.btn-group-toggle{"aria-label" => "Basic example", :role => "group"}
     = link_to "ផែនទី", root_path(kind: params[:kind], daterange: @date_range), class: "btn btn-sm btn-outline-dark #{get_css_active_class('welcome')}"
-    = link_to "បញ្ជី", listings_path(kind: params[:kind]), class: "btn btn-sm btn-outline-dark #{get_css_active_class('listings')}"
+    = link_to "បញ្ជី", listings_path(kind: params[:kind], daterange: @date_range), class: "btn btn-sm btn-outline-dark #{get_css_active_class('listings')}"

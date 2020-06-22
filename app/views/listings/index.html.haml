@@ -1,11 +1,17 @@
 = render 'shared/switch_view'
 
 .options
+  .d-inline.mr-2{:style => "font-size: 18px"}
+    បង្ហាញចំនួនតេ #{@count} ក្នុង #{User.count}
+
+  %form.from{ action: '/listings' }
+    = render 'shared/date_filter'
+
   = render 'shared/avata'
 
 #content.d-flex
   .graph.mr-4
-    %canvas#myChart{'data-provinces' => @provinces.to_json}
+    %canvas#myChart{'data-provinces' => @locations.to_json}
 
   .content.flex-grow-1
     #tree
