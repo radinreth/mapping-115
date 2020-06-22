@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  resources :listings, only: [:index]
+
   resource :manifest, only: [:show]
   constraints Whitelist.new do
     resources :caller_logs, path: 'caller_locations', only: [:create]

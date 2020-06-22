@@ -9,6 +9,8 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("bootstrap/js/dist/alert")
+require("bootstrap/js/dist/dropdown")
+
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -21,4 +23,5 @@ require("leaflet")
 require("namespace")
 require("helper")
 require("welcome")
+require("listings")
 require("application")

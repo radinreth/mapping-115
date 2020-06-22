@@ -1,12 +1,10 @@
 version: '3'
 
 volumes:
+  bundle:
+  node_modules:
   db:
   rdb:
-  #nginx-certs:
-  #nginx-dhparam:
-  #nginx-vhost:
-  nginx-html:
 
 services:
   db:
@@ -14,74 +12,35 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_HOST_AUTH_METHOD: trust
+
 
   web: &rails
-    image: radinreth/mapping-115:0.1.21
-    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
-      - /tmp/pids:/app/tmp/pids
+      - .:/app
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+    tmpfs: /app/tmp
     depends_on:
       - db
       - redis
-    environment:
-      - LANG=C.UTF-8
-      - RAILS_SERVE_STATIC_FILES=true
-      - DATABASE_URL=postgres://postgres:123456@db/mapping_115
-      - VIRTUAL_HOST=115-map.cdcmoh.gov.kh
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=115-map.cdcmoh.gov.kh
-      - LETSENCRYPT_EMAIL=kakada@instedd.org
-      - TELCO_URL=https://mptc-api-v1-u4tislywtq-de.a.run.app/covid19-location-solution/current_location
-      - TOKEN=0c416331-9ec2-4c10-bd69-a2638501f0fd
-      - REDIS_URL=redis://redis:6379
-      - ALLOWED_HOSTS=103.248.43.242,192.168.0.1,54.169.184.162,117.20.113.143,124.248.184.182,136.228.131.101
-      - CALL_LOGS_FETCH_INTERVAL=5
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '5'
-    command:
-    - /bin/sh
-    - -c
-    - bundle exec puma --preload -e production -b tcp://0.0.0.0:80
-    
+    env_file: app.env
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+
   redis:
     image: redis:5.0.7
     volumes:
       - rdb:/data
 
-  sidekiq:
-    <<: *rails
-    command: bundle exec sidekiq
-    ports: []
+  # sidekiq:
+  #   <<: *rails
+  #   command: bundle exec sidekiq
+  #   ports: []
 
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
-    ports:
-      - 80:80
-      #- 443:443
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      #- nginx-certs:/etc/nginx/certs:ro
-      #- nginx-dhparam:/etc/nginx/dhparam
-      #- nginx-vhost:/etc/nginx/vhost.d
-      - nginx-html:/usr/share/nginx/html
-      - ./config/proxy_settings.conf:/etc/nginx/conf.d/proxy_settings.conf
-    labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
-    depends_on:
-      - web
-
-    #letsencrypt:
-    #  image: jrcs/letsencrypt-nginx-proxy-companion
-    #  depends_on:
-    #    - nginx-proxy
-    #  volumes:
-    #    - /var/run/docker.sock:/var/run/docker.sock:ro
-    #    - nginx-certs:/etc/nginx/certs:rw
-    #    - nginx-dhparam:/etc/nginx/dhparam
-    #    - nginx-vhost:/etc/nginx/vhost.d
-    #    - nginx-html:/usr/share/nginx/html

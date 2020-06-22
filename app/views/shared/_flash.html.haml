@@ -1,0 +1,12 @@
+.flash
+  = link_to "sign-out", destroy_admin_session_path, class: 'd-none', method: :delete
+  - if notice
+    %p.alert.alert-primary.alert-dismissible.fade.show{:role => "alert"}
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      = notice
+  - if alert
+    %p.alert.alert-warning.alert-dismissible.fade.show{:role => "alert"}
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      = alert
