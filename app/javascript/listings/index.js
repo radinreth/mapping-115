@@ -10,8 +10,8 @@ App.ListingsIndex = () => {
         'data' : {
           'url' : function (node) {
             return node.id === '#' ?
-              '/listings/provinces' :
-              '/listings/child_locations';
+              '/listings.json' :
+              '/listings/locations';
           },
           'data' : function (node) {
             return { 'id' : node.id };
@@ -24,14 +24,10 @@ App.ListingsIndex = () => {
   initBarChart = () => {
     var ctx = document.getElementById('myChart').getContext('2d');
     let provinces = $('#myChart').data('provinces');
-    // console.log(provinces)
     let labels = provinces.map(p => p.name_km);
     let data = provinces.map(p => p.callers_count);
     var chart = new Chart(ctx, {
-        // The type of chart we want to create
         type: 'bar',
-
-        // The data for our dataset
         data: {
             labels: labels,
             datasets: [{
@@ -41,8 +37,6 @@ App.ListingsIndex = () => {
                 data: data
             }]
         },
-
-        // Configuration options go here
         options: {}
     });
   }

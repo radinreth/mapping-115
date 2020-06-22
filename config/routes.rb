@@ -10,12 +10,8 @@ Rails.application.routes.draw do
   end
 
   resources :listings, only: [:index] do
-    collection do
-      get :provinces
-      get :child_locations
-    end
+    get :locations, on: :collection
   end
-
 
   resource :manifest, only: [:show]
   constraints Whitelist.new do
