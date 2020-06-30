@@ -1,6 +1,7 @@
 # work as verboice external service url
 class CallerLogsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_admin!
 
   def create
     options = {
