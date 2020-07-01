@@ -12,6 +12,12 @@ class ListingsController < ApplicationController
     end
   end
 
+  def download
+    service = ListingService.new(@options)
+
+    send_data(service.export_excel, filename: 'listings.xlsx')
+  end
+
   private
     def set_daterange
       current_date = Date.current.strftime('%Y/%m/%d')

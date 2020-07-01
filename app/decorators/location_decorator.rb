@@ -23,7 +23,7 @@ class LocationDecorator
       jsonData = locations.as_json
       jsonData.each_with_index do |location, index|
         location['callers_count'] = group_data[location['code']].to_i
-        location['text'] = "#{location['code']}. #{location['name_km']} (#{location['callers_count']})"
+        location['text'] = "#{location['code']}. #{location['name_en']} (#{location['callers_count']})"
         location['children'] = @child_kind == 'commune' ? false : locations[index].children.present?
         location['id'] = location['code']
         location['icon'] = ActionController::Base.helpers.image_url(icon)
