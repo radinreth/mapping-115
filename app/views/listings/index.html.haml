@@ -17,10 +17,8 @@
     %canvas#myChart{'data-provinces' => @locations.to_json}
 
   .content.flex-grow-1
-    = link_to download_listings_path(daterange: params[:daterange]), class: 'btn btn-sm btn-secondary mb-4' do
+    = link_to download_listings_path(daterange: params[:daterange]), class: 'btn btn-sm btn-secondary mb-4', target: '_blank' do
       %i.fas.fa-cloud-download-alt
       %span Download
 
     #tree
-
-
