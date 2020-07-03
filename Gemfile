@@ -29,6 +29,8 @@ gem "simple_form"
 
 gem 'haml-rails', '~> 2.0'
 
+gem 'fast_excel', '~> 0.2.6'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'

@@ -2,7 +2,6 @@ version: '3'
 
 volumes:
   bundle:
-  node_modules:
   db:
   rdb:
 
@@ -23,7 +22,7 @@ services:
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
-      - node_modules:/app/node_modules
+      - ./node_modules:/app/node_modules
     tmpfs: /app/tmp
     depends_on:
       - db

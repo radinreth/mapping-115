@@ -2,7 +2,7 @@
 
 .options
   .d-inline.mr-2{:style => "font-size: 18px"}
-    បង្ហាញចំនួនតេ #{@count} ក្នុង #{User.count}
+    = "Display # of caller <b>#{@count}</b> of <b>#{User.count}</b> in total".html_safe
 
   %form.from{ action: '/listings' }
     = render 'shared/date_filter'
@@ -10,10 +10,17 @@
   = render 'shared/avata'
 
 #content.d-flex
-  .graph.mr-4
+  .graph.mr-5.position-relative
+    %button#btn-download-chart.btn.btn-circle.btn-sm.btn-outline-secondary
+      %i.fas.fa-cloud-download-alt
+
     %canvas#myChart{'data-provinces' => @locations.to_json}
 
   .content.flex-grow-1
+    = link_to download_listings_path(daterange: params[:daterange]), class: 'btn btn-sm btn-secondary mb-4' do
+      %i.fas.fa-cloud-download-alt
+      %span Download
+
     #tree
 
 

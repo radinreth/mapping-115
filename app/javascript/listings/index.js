@@ -1,8 +1,11 @@
 App.ListingsIndex = () => {
+  let chart;
+
   init = () => {
     initTreeView();
     initBarChart();
     renderDatetimepicker();
+    onClickBtnDownloadChart();
   }
 
   renderDatetimepicker = () => {
@@ -45,21 +48,31 @@ App.ListingsIndex = () => {
   initBarChart = () => {
     var ctx = document.getElementById('myChart').getContext('2d');
     let provinces = $('#myChart').data('provinces');
-    let labels = provinces.map(p => p.name_km);
+    let labels = provinces.map(p => p.name_en);
     let data = provinces.map(p => p.callers_count);
-    var chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'ចំនួនអ្នកតេចូល',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: data
-            }]
-        },
-        options: {}
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: '# of callers',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: data
+          }]
+      },
+      options: {
+      }
     });
+  }
+
+  onClickBtnDownloadChart = () => {
+    $('#btn-download-chart').on('click', (e) => {
+      let a = document.createElement("a");
+      a.href = chart.toBase64Image()
+      a.download = "chart.png";
+      a.click();
+    })
   }
 
   return { init }

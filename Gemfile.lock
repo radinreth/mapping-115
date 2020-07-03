@@ -106,6 +106,8 @@ GEM
       railties (>= 4.2.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    fast_excel (0.2.6)
+      ffi (> 1.9, < 2)
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -332,6 +334,7 @@ DEPENDENCIES
   devise-i18n
   dotenv-rails
   factory_bot_rails
+  fast_excel (~> 0.2.6)
   gon
   haml-rails (~> 2.0)
   jbuilder (~> 2.7)
